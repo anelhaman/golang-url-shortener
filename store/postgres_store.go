@@ -1,15 +1,18 @@
 package store
 
 import (
+	"time"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 // URL represents the URL mapping
 type URL struct {
-	ID       uint   `gorm:"primaryKey"`
-	ShortURL string `gorm:"uniqueIndex"`
-	LongURL  string
+	ID        uint      `gorm:"primaryKey"`
+	ShortURL  string    `gorm:"uniqueIndex"`
+	LongURL   string    `gorm:"not null"`
+	CreatedAt time.Time `gorm:"autoCreateTime"` // Automatically set to current timestamp
 }
 
 // PostgresStore implements the DataStore interface for PostgreSQL
